@@ -8,26 +8,28 @@
 import Combine
 import GameplayKit
 
-class CTGaneContext: GameContext {
-    var fameScene: CTGameScene?{
+class CTGameContext: GameContext {
+    var gameScene: CTGameScene? {
         scene as? CTGameScene
     }
     let gameMode: GameModeType
-    let gameInfo: CTgameInfo
+    let gameInfo: CTGameInfo
     var layoutInfo: CTLayoutInfo = .init(screenSize: .zero)
     
     private(set) var stateMachine: GKStateMachine?
     
-    init(dependecies: Dependencies, gameMode: GameModeType){
+    init(dependencies: Dependencies, gameMode: GameModeType) {
         self.gameInfo = CTGameInfo()
-        self.gameMode = gameModesuper.init(dependencies: dependecies)
+        self.gameMode = gameMode
+        super.init(dependencies: dependencies)
     }
     
-    func configureStates(){
+    func configureStates() {
         guard let gameScene else { return }
         print("did configure states")
         stateMachine = GKStateMachine(states: [
             CTGameIdleState(scene: gameScene, context: self)
         ])
     }
+
 }

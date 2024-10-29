@@ -119,9 +119,9 @@
 			children = (
 				906BD52B2CCB0AFA00912813 /* States */,
 				906BD5292CCB07C100912813 /* Nodes */,
+				906BD5242CCAF4D300912813 /* Helpers */,
 				906BD5282CCAF83600912813 /* CTGameScene.swift */,
 				906BD5272CCAF5F700912813 /* CTGameContext.swift */,
-				906BD5242CCAF4D300912813 /* Helpers */,
 			);
 			path = Code;
 			sourceTree = "<group>";
