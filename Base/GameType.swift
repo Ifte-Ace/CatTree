@@ -2,7 +2,7 @@
 //  GameType.swift
 //  Test
 //
-//  Created by Hyung Lee on 10/20/24.
+//  Created by Ifte Alam 10/31/24.
 //
 
 import SwiftUI
