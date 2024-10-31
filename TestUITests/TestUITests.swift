@@ -1,14 +1,13 @@
 //
-//  CatTreeAlphaUITests.swift
-//  CatTreeAlphaUITests
+//  TestUITests.swift
+//  TestUITests
 //
-//  Created by Ifte Alam on 10/29/24.
+//  Created by Ifte Alam 10/31/24.
 //
 
 import XCTest
 
-
-final class CatTreeAlphaUITests: XCTestCase {
+final class TestUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

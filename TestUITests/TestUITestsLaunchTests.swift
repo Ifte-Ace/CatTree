@@ -1,13 +1,13 @@
 //
-//  CatTreeAlphaUITestsLaunchTests.swift
-//  CatTreeAlphaUITests
+//  TestUITestsLaunchTests.swift
+//  TestUITests
 //
-//  Created by Ifte Alam on 10/29/24.
+//  Created by Ifte Alam 10/31/24.
 //
 
 import XCTest
 
-final class CatTreeAlphaUITestsLaunchTests: XCTestCase {
+final class TestUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
