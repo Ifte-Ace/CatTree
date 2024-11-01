@@ -19,6 +19,7 @@
 		85B58AE12CC5EAC9001C8D21 /* TTGameIdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B58AE02CC5EAC9001C8D21 /* TTGameIdleState.swift */; };
 		85B58AE32CC603B0001C8D21 /* TTBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B58AE22CC603B0001C8D21 /* TTBoxNode.swift */; };
 		903031572CD4421400CFF41D /* StartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903031562CD4421400CFF41D /* StartState.swift */; };
+		90FB84EB2CD57A9B002C7233 /* GameOverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FB84EA2CD57A9B002C7233 /* GameOverState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		85B58AE02CC5EAC9001C8D21 /* TTGameIdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTGameIdleState.swift; sourceTree = "<group>"; };
 		85B58AE22CC603B0001C8D21 /* TTBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTBoxNode.swift; sourceTree = "<group>"; };
 		903031562CD4421400CFF41D /* StartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartState.swift; sourceTree = "<group>"; };
+		90FB84EA2CD57A9B002C7233 /* GameOverState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -181,6 +183,7 @@
 		85B58ADF2CC5EA8A001C8D21 /* States */ = {
 			isa = PBXGroup;
 			children = (
+				90FB84EA2CD57A9B002C7233 /* GameOverState.swift */,
 				903031562CD4421400CFF41D /* StartState.swift */,
 				85B58AE02CC5EAC9001C8D21 /* TTGameIdleState.swift */,
 			);
@@ -341,6 +344,7 @@
 				85B58ADC2CC5DA93001C8D21 /* TTGameInfo.swift in Sources */,
 				85B58AD82CC5CA48001C8D21 /* Dependencies.swift in Sources */,
 				85B58AE12CC5EAC9001C8D21 /* TTGameIdleState.swift in Sources */,
+				90FB84EB2CD57A9B002C7233 /* GameOverState.swift in Sources */,
 				903031572CD4421400CFF41D /* StartState.swift in Sources */,
 				85B58AC82CC5C304001C8D21 /* TTGameContext.swift in Sources */,
 			);

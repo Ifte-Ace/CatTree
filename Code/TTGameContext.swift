@@ -28,7 +28,8 @@ class TTGameContext: GameContext {
         guard let gameScene else { return }
         stateMachine = GKStateMachine(states: [
             StartState(scene: gameScene, context: self),
-            TTGameIdleState(scene: gameScene, context: self)
+            TTGameIdleState(scene: gameScene, context: self),
+            GameOverState(scene: gameScene) // Add GameOverState here
         ])
         stateMachine?.enter(StartState.self) // Start with StartState
     }

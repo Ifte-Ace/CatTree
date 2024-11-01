@@ -35,14 +35,26 @@ class TTGameScene: SKScene {
         label.isHidden = true  // Initially hidden
         return label
     }()
+    
+    private var gameOverLabel: SKLabelNode = {
+        let label = SKLabelNode(text: "Game Over")
+        label.fontSize = 36
+        label.fontColor = .red
+        label.isHidden = true // Initially hidden
+        return label
+    }()
 
     init(context: TTGameContext, size: CGSize) {
         self.context = context
         super.init(size: size)
+        
         addChild(startButton)
-        addChild(tapAnywhereLabel) // Add tap label to the scene
-
-        // Set up the camera
+        addChild(tapAnywhereLabel)
+        
+        // Add the score and game over labels to the cameraNode for relative positioning
+        cameraNode.addChild(scoreLabel)
+        cameraNode.addChild(gameOverLabel)
+        
         self.camera = cameraNode
         addChild(cameraNode)
     }
@@ -64,7 +76,6 @@ class TTGameScene: SKScene {
         scoreLabel.fontColor = .white
         scoreLabel.position = CGPoint(x: 0, y: size.height / 2 - 40)  // Adjusted for camera-relative positioning
         scoreLabel.text = "Score: 0"
-        cameraNode.addChild(scoreLabel)  // Add label to camera
 
         // Position camera at the bottom center initially
         cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -80,10 +91,7 @@ class TTGameScene: SKScene {
         stackHeight = context.layoutInfo.boxSize.height
         
         // Center the tap label
-        tapAnywhereLabel.position = CGPoint(x: size.width / 2, y: size.height / 2) // Center the label
-        
-        // Spawn the first swaying block
-        // spawnSwayingBox() // Uncomment if needed
+        tapAnywhereLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
         
         context.stateMachine?.enter(StartState.self) // Start with StartState
     }
@@ -111,6 +119,15 @@ class TTGameScene: SKScene {
     func hideStartButton() {
         startButton.isHidden = true
         tapAnywhereLabel.isHidden = false // Show the tap label when hiding the start button
+    }
+
+    func showGameOverLabel() {
+        gameOverLabel.position = CGPoint(x: 0, y: size.height / 2 - 100) // Relative to cameraNode, near the top
+        gameOverLabel.isHidden = false
+    }
+
+    func hideGameOverLabel() {
+        gameOverLabel.isHidden = true
     }
 
     var swayDirection: CGFloat = 1.0 // 1.0 for right, -1.0 for left
@@ -180,7 +197,7 @@ class TTGameScene: SKScene {
             } else {
                 // Reset or stop stacking if it does not touch
                 print("Block did not land correctly. Stopping stacking.")
-                // Implement a reset or stop stacking action if needed
+                context?.stateMachine?.enter(GameOverState.self) // Enter GameOverState
             }
         } else {
             // If no previous box, simply spawn the new swaying box
@@ -210,5 +227,4 @@ class TTGameScene: SKScene {
             tapAnywhereLabel.isHidden = true // Hide "Tap anywhere to start" label when playing
         }
     }
-
 }
