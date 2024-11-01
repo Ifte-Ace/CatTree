@@ -20,9 +20,27 @@ class TTGameScene: SKScene {
     private var scoreLabel: SKLabelNode = SKLabelNode(fontNamed: "AvenirNext-Bold") // Score label
     private var score: Int = 0 // Score variable
 
+    private var startButton: SKLabelNode = {
+        let label = SKLabelNode(text: "Start Game")
+        label.fontSize = 36
+        label.fontColor = .white
+        label.isHidden = false  // Initially visible
+        return label
+    }()
+    
+    private var tapAnywhereLabel: SKLabelNode = {
+        let label = SKLabelNode(text: "Tap anywhere to start")
+        label.fontSize = 24
+        label.fontColor = .white
+        label.isHidden = true  // Initially hidden
+        return label
+    }()
+
     init(context: TTGameContext, size: CGSize) {
         self.context = context
         super.init(size: size)
+        addChild(startButton)
+        addChild(tapAnywhereLabel) // Add tap label to the scene
 
         // Set up the camera
         self.camera = cameraNode
@@ -37,6 +55,7 @@ class TTGameScene: SKScene {
         guard let context else {
             return
         }
+        
         context.scene = self
         context.configureStates()
 
@@ -60,10 +79,13 @@ class TTGameScene: SKScene {
         // Set the initial stacking height above the base block
         stackHeight = context.layoutInfo.boxSize.height
         
-        // Spawn the first swaying block
-        spawnSwayingBox()
+        // Center the tap label
+        tapAnywhereLabel.position = CGPoint(x: size.width / 2, y: size.height / 2) // Center the label
         
-        context.stateMachine?.enter(TTGameIdleState.self)
+        // Spawn the first swaying block
+        // spawnSwayingBox() // Uncomment if needed
+        
+        context.stateMachine?.enter(StartState.self) // Start with StartState
     }
     
     func spawnSwayingBox() {
@@ -79,7 +101,18 @@ class TTGameScene: SKScene {
         // Start swaying animation
         startSwaying()
     }
-    
+
+    func showStartButton() {
+        startButton.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        startButton.isHidden = false
+        tapAnywhereLabel.isHidden = true // Hide the tap label when showing the start button
+    }
+
+    func hideStartButton() {
+        startButton.isHidden = true
+        tapAnywhereLabel.isHidden = false // Show the tap label when hiding the start button
+    }
+
     var swayDirection: CGFloat = 1.0 // 1.0 for right, -1.0 for left
     func startSwaying() {
         swayTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { [weak self] _ in
@@ -166,9 +199,16 @@ class TTGameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let state = context?.stateMachine?.currentState as? TTGameIdleState else {
-            return
+        guard let touch = touches.first, let context = context else { return }
+        
+        if let state = context.stateMachine?.currentState as? StartState {
+            state.handleTouch(touch)
+            hideStartButton() // Hide the start button when touched
+            tapAnywhereLabel.isHidden = false // Hide "Tap anywhere to start" label when starting the game
+        } else if let state = context.stateMachine?.currentState as? TTGameIdleState {
+            state.handleTouch(touch)
+            tapAnywhereLabel.isHidden = true // Hide "Tap anywhere to start" label when playing
         }
-        state.handleTouch(touch)
     }
+
 }

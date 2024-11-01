@@ -26,10 +26,13 @@ class TTGameContext: GameContext {
     
     func configureStates() {
         guard let gameScene else { return }
-        print("did configure states")
         stateMachine = GKStateMachine(states: [
+            StartState(scene: gameScene, context: self),
             TTGameIdleState(scene: gameScene, context: self)
         ])
+        stateMachine?.enter(StartState.self) // Start with StartState
     }
+
+
 
 }
